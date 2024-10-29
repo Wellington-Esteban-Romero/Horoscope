@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Horoscope</string>
+
+    <string name="aries">Aries</string>
+    <string name="tauro">Tauro</string>
+    <string name="geminis">Géminis</string>
+    <string name="cancer">Cáncer</string>
+    <string name="leo">Leo</string>
+    <string name="virgo">Virgo</string>
+    <string name="libra">Libra</string>
+    <string name="escorpio">Escorpio</string>
+    <string name="sagitario">Sagitario</string>
+    <string name="capripornio">Capricornio</string>
+    <string name="acuario">Acuario</string>
+    <string name="piscis">Piscis</string>
+
+    <string name="date_aries">21 de marzo al 19 de abril</string>
+    <string name="date_tauro">20 de abril al 20 de mayo</string>
+    <string name="date_geminis">21 de mayo al 20 de junio</string>
+    <string name="date_cancer">21 de junio al 22 de julio</string>
+    <string name="date_leo">23 de julio al 22 de agosto</string>
+    <string name="date_virgo">23 de agosto al 22 de septiembre</string>
+    <string name="date_libra">23 de septiembre al 22 de octubre</string>
+    <string name="date_escorpio">23 de octubre al 21 de noviembre</string>
+    <string name="date_sagitario">22 de noviembre al 21 de diciembre</string>
+    <string name="date_capripornio">22 de diciembre al 19 de enero</string>
+    <string name="date_acuario">20 de enero al 18 de febrero</string>
+    <string name="date_piscis">19 de febrero al 20 de marzo</string>
+</resources>
