@@ -90,10 +90,7 @@ class MainActivity : AppCompatActivity() {
     private fun onItemSelect(horoscope: Horoscope) {
         Toast.makeText(this, getString(horoscope.name), Toast.LENGTH_SHORT).show()
         val intent = Intent(this, HoroscopeDetail::class.java)
-        intent.putExtra("id", horoscope.id)
-        intent.putExtra("name", horoscope.name)
-        intent.putExtra("date", horoscope.date)
-        intent.putExtra("imgage", horoscope.image)
+        intent.putExtra("id", horoscope.id.toString())
         startActivity(intent)
     }
 
