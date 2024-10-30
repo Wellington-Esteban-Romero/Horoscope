@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        var supportActionBar = getSupportActionBar();
+        var supportActionBar = supportActionBar;
         supportActionBar?.setDisplayShowHomeEnabled(true);
         supportActionBar?.setLogo(R.drawable.ic_zodiac);
         supportActionBar?.setDisplayUseLogoEnabled(true);
@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = horoscopeAdapter
         }
+        getSupportActionBarHoroscope()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -81,10 +82,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (filteredList.isEmpty()) {
-            Toast.makeText(this, "No se encuentra el horoscopo", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getText(R.string.no_search), Toast.LENGTH_SHORT).show()
         } else {
             horoscopeAdapter.filterList(filteredList)
         }
+    }
+
+    private fun getSupportActionBarHoroscope () {
+        var supportActionBar = supportActionBar;
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+        supportActionBar?.setLogo(R.drawable.ic_zodiac);
+        supportActionBar?.setDisplayUseLogoEnabled(true);
     }
 
 }

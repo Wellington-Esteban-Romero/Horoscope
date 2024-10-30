@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E0DBE6"
+    android:background="#11EF05EF"
     tools:context="com.horoscope.MainActivity">
     
     <LinearLayout
@@ -17,7 +17,6 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHoroscope"
             android:layout_width="match_parent"
-            tools:listitem="@layout/item_horoscopo"
             android:layout_height="match_parent">
 
         </androidx.recyclerview.widget.RecyclerView>
