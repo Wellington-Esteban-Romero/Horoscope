@@ -25,7 +25,7 @@ class HoroscopeProvider {
             return horoscopes;
         }
 
-        fun finByIf(id: Int): Horoscope {
+        fun findById(id: Int): Horoscope {
             return horoscopes.stream()
                 .filter { h -> h.id == id }
                 .findFirst()

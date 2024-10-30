@@ -1,6 +1,6 @@
 package com.horoscope
 
-import android.app.ActionBar
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -35,20 +35,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        var supportActionBar = supportActionBar;
-        supportActionBar?.setDisplayShowHomeEnabled(true);
-        supportActionBar?.setLogo(R.drawable.ic_zodiac);
-        supportActionBar?.setDisplayUseLogoEnabled(true);
-
         val recycler = findViewById<RecyclerView>(R.id.rvHoroscope)
         horoscopeList = HoroscopeProvider.findAll()
 
-        horoscopeAdapter = HoroscopeAdapter(horoscopeList)
+        //val manager = GridLayoutManager(this, )
+        horoscopeAdapter = HoroscopeAdapter(horoscopeList) { horoscope ->
+            onItemSelect(horoscope)
+        }
 
         recycler.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = horoscopeAdapter
         }
+
         getSupportActionBarHoroscope()
     }
 
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null) filter(newText)
+                    if (newText != null) filter(newText)
                 return false
             }
         })
@@ -86,6 +85,16 @@ class MainActivity : AppCompatActivity() {
         } else {
             horoscopeAdapter.filterList(filteredList)
         }
+    }
+
+    private fun onItemSelect(horoscope: Horoscope) {
+        Toast.makeText(this, getString(horoscope.name), Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, HoroscopeDetail::class.java)
+        intent.putExtra("id", horoscope.id)
+        intent.putExtra("name", horoscope.name)
+        intent.putExtra("date", horoscope.date)
+        intent.putExtra("imgage", horoscope.image)
+        startActivity(intent)
     }
 
     private fun getSupportActionBarHoroscope () {
