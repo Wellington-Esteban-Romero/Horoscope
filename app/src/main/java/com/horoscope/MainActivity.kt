@@ -1,6 +1,8 @@
 package com.horoscope
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -99,6 +101,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true);
         supportActionBar?.setLogo(R.drawable.ic_zodiac);
         supportActionBar?.setDisplayUseLogoEnabled(true);
+
+        val colorDrawable = ColorDrawable(getResources().getColor(R.color.menu_color, null))
+        supportActionBar!!.setBackgroundDrawable(colorDrawable)
     }
 
 }

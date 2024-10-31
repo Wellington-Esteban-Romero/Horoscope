@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <item
-        android:id="@+id/actionSearchx"
+        android:id="@+id/actionFavorite"
         android:icon="@drawable/ic_favorite_empty"
-        android:title="Search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView"/>
+        android:orderInCategory="100"
+        android:title="TODO"
+        app:showAsAction="always"/>
 
 </menu>
