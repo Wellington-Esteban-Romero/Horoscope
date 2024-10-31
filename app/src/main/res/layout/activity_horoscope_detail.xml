@@ -8,7 +8,7 @@
     tools:context=".HoroscopeDetail">
 
     <TextView
-        android:id="@+id/imgHoroscope"
+        android:id="@+id/txtViewNameHoroscope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="sa"
@@ -17,18 +17,39 @@
         tools:ignore="MissingConstraints">
 
     </TextView>
+
+    <LinearLayout
+        android:id="@+id/idSquare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/txtViewNameHoroscope">
+
+        <ImageView
+            android:id="@id/imgHoroscope"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxWidth="280dp"
+            android:minHeight="280dp"
+            android:cropToPadding="true"
+            android:background="@drawable/border_image"
+            tools:ignore="MissingConstraints">
+
+        </ImageView>
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/txtViewHoroscope"
+        android:id="@+id/txtViewDateHoroscope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="sa"
         android:gravity="center"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="@id/imgHoroscope"
-        app:layout_constraintTop_toBottomOf="@id/imgHoroscope"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/idSquare"
         tools:ignore="MissingConstraints">
 
     </TextView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,20 @@
 package com.horoscope
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.horoscope.data.Horoscope
 import com.horoscope.data.HoroscopeProvider
 
 class HoroscopeDetail : AppCompatActivity() {
 
-    private lateinit var txtNameHoroscope: TextView
+    private lateinit var txtViewNameHoroscope: TextView
+    private lateinit var imgHoroscope: ImageView
+    private lateinit var txtDateHoroscope: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +26,32 @@ class HoroscopeDetail : AppCompatActivity() {
             insets
         }
 
-        txtNameHoroscope = findViewById(R.id.txtViewHoroscope)
+        init()
 
+        var horoscope:Horoscope = getHoroscope();
+
+        txtViewNameHoroscope.setText(horoscope.name)
+        imgHoroscope.setImageResource(horoscope.image)
+        txtDateHoroscope.setText(horoscope.date)
+
+        getSupportActionBarHoroscope ()
+    }
+
+    private fun init() {
+        txtViewNameHoroscope = findViewById(R.id.txtViewNameHoroscope)
+        imgHoroscope = findViewById(R.id.imgHoroscope)
+        txtDateHoroscope = findViewById(R.id.txtViewDateHoroscope)
+    }
+
+    private fun getHoroscope ():Horoscope {
         var id = intent.getStringExtra("id")
+        return HoroscopeProvider.findById(id!!.toInt())
+    }
 
-        var horoscope = HoroscopeProvider.findById(id!!.toInt())
-
-        txtNameHoroscope.setText(horoscope.name)
-
+    private fun getSupportActionBarHoroscope () {
+        var supportActionBar = supportActionBar;
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+        supportActionBar?.setLogo(R.drawable.ic_zodiac);
+        supportActionBar?.setDisplayUseLogoEnabled(true);
     }
 }

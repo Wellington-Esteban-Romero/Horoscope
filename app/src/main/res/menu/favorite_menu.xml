@@ -6,9 +6,10 @@
     android:orientation="vertical">
 
     <item
-        android:id="@+id/actionSearch"
-        android:icon="@android:drawable/ic_menu_search"
+        android:id="@+id/actionSearchx"
+        android:icon="@drawable/ic_favorite_empty"
         android:title="Search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView"/>
+
 </menu>
