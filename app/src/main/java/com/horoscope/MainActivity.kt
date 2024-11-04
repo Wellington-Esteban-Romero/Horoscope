@@ -1,7 +1,6 @@
 package com.horoscope
 
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
@@ -27,6 +26,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var horoscopeAdapter: HoroscopeAdapter
     private lateinit var horoscopeList: List<Horoscope>
 
+    companion object {
+        lateinit var prefs: Prefs
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,6 +39,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        prefs = Prefs(applicationContext)
 
         val recycler = findViewById<RecyclerView>(R.id.rvHoroscope)
         horoscopeList = HoroscopeProvider.findAll()
@@ -90,9 +95,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onItemSelect(horoscope: Horoscope) {
-        Toast.makeText(this, getString(horoscope.name), Toast.LENGTH_SHORT).show()
         val intent = Intent(this, HoroscopeDetail::class.java)
         intent.putExtra("id", horoscope.id.toString())
+
+        var name = getString(horoscope.name)
+
+        if (prefs.getName(name) != Prefs.ACTIVE) prefs.saveName(name, Prefs.DESACTIVE)
+
         startActivity(intent)
     }
 

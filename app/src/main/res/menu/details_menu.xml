@@ -12,4 +12,11 @@
         android:title="TODO"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/actionShare"
+        android:icon="@drawable/ic_share"
+        android:orderInCategory="100"
+        android:title="TODO"
+        app:showAsAction="always"/>
+
 </menu>

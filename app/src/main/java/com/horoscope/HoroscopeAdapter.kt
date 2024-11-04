@@ -8,7 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.horoscope.data.Horoscope
 
-class HoroscopeAdapter(private var horoscopes: List<Horoscope>, private val onClickListener: (Horoscope) -> Unit): RecyclerView.Adapter<HoroscopeViewHolder>() {
+class HoroscopeAdapter(
+    private var horoscopes: List<Horoscope>,
+    private val onClickListener: (Horoscope) -> Unit
+) : RecyclerView.Adapter<HoroscopeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoroscopeViewHolder {
         return HoroscopeViewHolder(
@@ -16,7 +19,7 @@ class HoroscopeAdapter(private var horoscopes: List<Horoscope>, private val onCl
         )
     }
 
-    fun filterList (filterList: List<Horoscope>) {
+    fun filterList(filterList: List<Horoscope>) {
         horoscopes = filterList;
         notifyDataSetChanged()
     }
@@ -25,21 +28,21 @@ class HoroscopeAdapter(private var horoscopes: List<Horoscope>, private val onCl
         holder.render(horoscopes[position], onClickListener)
     }
 
-    override fun getItemCount() =  horoscopes.size
+    override fun getItemCount() = horoscopes.size
 }
 
-class HoroscopeViewHolder(view: View): RecyclerView.ViewHolder (view) {
+class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val txtName = view.findViewById<TextView>(R.id.txtHorosocpe)
-    private val dateHoroscope =  view.findViewById<TextView>(R.id.dateHoroscope)
+    private val dateHoroscope = view.findViewById<TextView>(R.id.dateHoroscope)
     private val imgHoroscope = view.findViewById<ImageView>(R.id.imgHoroscope)
 
-        fun render (horoscope: Horoscope, onClickListener: (Horoscope) -> Unit) {
+    fun render(horoscope: Horoscope, onClickListener: (Horoscope) -> Unit) {
         val context = itemView.context
         txtName.text = context.getString(horoscope.name)
         dateHoroscope.text = context.getString(horoscope.date)
         imgHoroscope.setImageResource(horoscope.image)
-        imgHoroscope.setOnClickListener {
+        itemView.setOnClickListener {
             onClickListener(horoscope)
         }
     }
