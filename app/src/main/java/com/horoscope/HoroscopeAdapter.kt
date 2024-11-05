@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.horoscope.data.Horoscope
+import com.horoscope.utils.SessionManager
 
 class HoroscopeAdapter(
     private var horoscopes: List<Horoscope>,
@@ -36,6 +37,7 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val txtName = view.findViewById<TextView>(R.id.txtHorosocpe)
     private val dateHoroscope = view.findViewById<TextView>(R.id.dateHoroscope)
     private val imgHoroscope = view.findViewById<ImageView>(R.id.imgHoroscope)
+    private val favoriteImageView = view.findViewById<ImageView>(R.id.imgFavorite)
 
     fun render(horoscope: Horoscope, onClickListener: (Horoscope) -> Unit) {
         val context = itemView.context
@@ -44,6 +46,12 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         imgHoroscope.setImageResource(horoscope.image)
         itemView.setOnClickListener {
             onClickListener(horoscope)
+        }
+
+        if (SessionManager(context).isFavorite(txtName.text.toString())) {
+            favoriteImageView.visibility = View.VISIBLE
+        } else {
+            favoriteImageView.visibility = View.GONE
         }
     }
 

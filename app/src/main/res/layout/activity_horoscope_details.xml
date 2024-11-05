@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HoroscopeDetail">
+    tools:context=".DetailsHoroscope">
 
     <TextView
         android:id="@+id/txtViewNameHoroscope"
@@ -14,6 +14,7 @@
         android:text="sa"
         android:gravity="center"
         android:textSize="30dp"
+        android:layout_marginTop="10dp"
         tools:ignore="MissingConstraints">
 
     </TextView>
@@ -23,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/txtViewNameHoroscope">
 
         <ImageView
@@ -43,9 +45,10 @@
         android:id="@+id/txtViewDateHoroscope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="sa"
         android:gravity="center"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/idSquare"
         tools:ignore="MissingConstraints">
 

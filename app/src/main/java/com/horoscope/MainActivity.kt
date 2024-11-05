@@ -15,19 +15,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.horoscope.data.Horoscope
 import com.horoscope.data.HoroscopeProvider
+import com.horoscope.utils.SessionManager
 
 /*
 * ReclyclerView (Listar)
-* SharedPreferences (session)
+* SharedPreferences (session)f
 * Menús y navegacion
 * */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var horoscopeAdapter: HoroscopeAdapter
     private lateinit var horoscopeList: List<Horoscope>
+    private lateinit var recycler:RecyclerView
 
     companion object {
-        lateinit var prefs: Prefs
+        lateinit var session: SessionManager
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,12 +42,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        prefs = Prefs(applicationContext)
+        init()
 
-        val recycler = findViewById<RecyclerView>(R.id.rvHoroscope)
+        session = SessionManager(applicationContext)
+
+        recycler = findViewById(R.id.rvHoroscope)
         horoscopeList = HoroscopeProvider.findAll()
 
-        //val manager = GridLayoutManager(this, )
         horoscopeAdapter = HoroscopeAdapter(horoscopeList) { horoscope ->
             onItemSelect(horoscope)
         }
@@ -54,8 +57,11 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = horoscopeAdapter
         }
-
         getSupportActionBarHoroscope()
+    }
+
+    private fun init() {
+        recycler = findViewById(R.id.rvHoroscope)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -88,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (filteredList.isEmpty()) {
+            //setContentView(R.layout.empty)
             Toast.makeText(this, getText(R.string.no_search), Toast.LENGTH_SHORT).show()
         } else {
             horoscopeAdapter.filterList(filteredList)
@@ -95,14 +102,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onItemSelect(horoscope: Horoscope) {
-        val intent = Intent(this, HoroscopeDetail::class.java)
+        val intent = Intent(this, DetailsHoroscope::class.java)
         intent.putExtra("id", horoscope.id.toString())
 
         var name = getString(horoscope.name)
 
-        if (prefs.getName(name) != Prefs.ACTIVE) prefs.saveName(name, Prefs.DESACTIVE)
+        if (session.getHoroscope(name) != SessionManager.ACTIVE)
+            session.saveHoroscope(name, SessionManager.DES_ACTIVE)
 
         startActivity(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        horoscopeAdapter.notifyDataSetChanged()
     }
 
     private fun getSupportActionBarHoroscope () {

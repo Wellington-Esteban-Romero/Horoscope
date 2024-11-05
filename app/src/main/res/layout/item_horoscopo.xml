@@ -15,8 +15,8 @@
             android:id="@+id/imgHoroscope"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp">
         </ImageView>
 
         <LinearLayout
@@ -25,7 +25,6 @@
             android:orientation="vertical"
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
-
             <TextView
                 android:id="@+id/txtHorosocpe"
                 android:layout_width="fill_parent"
@@ -36,13 +35,26 @@
                 android:gravity="start"
                 android:paddingTop="10dp"
                 />
-            <TextView
-                android:id="@+id/dateHoroscope"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#343232"
-                >
-            </TextView>
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/dateHoroscope"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#343232"
+                    >
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/imgFavorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_favorite"
+                    android:visibility="invisible">
+                </ImageView>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -51,5 +63,6 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-></com.google.android.material.divider.MaterialDivider>
+    ></com.google.android.material.divider.MaterialDivider>
+
 </LinearLayout>
