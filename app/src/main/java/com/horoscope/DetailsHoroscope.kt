@@ -11,14 +11,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.horoscope.MainActivity.Companion.session
 import com.horoscope.data.Horoscope
 import com.horoscope.data.HoroscopeProvider
+import com.horoscope.data.HoroscopeResponse
+import com.horoscope.data.HoroscopeServiceFactory
 import com.horoscope.utils.SessionManager
+import kotlinx.coroutines.launch
 
 class DetailsHoroscope : AppCompatActivity() {
 
     private lateinit var txtViewNameHoroscope: TextView
+    private lateinit var txtViewDataHoroscope: TextView
     private lateinit var imgHoroscope: ImageView
     private lateinit var txtDateHoroscope: TextView
     private lateinit var horoscope: Horoscope
@@ -41,6 +46,15 @@ class DetailsHoroscope : AppCompatActivity() {
         imgHoroscope.setImageResource(horoscope.image)
         txtDateHoroscope.setText(horoscope.date)
 
+        val service = HoroscopeServiceFactory.getRetrofitService()
+
+        lifecycleScope.launch {
+           val horoscope = service.getHoroscope(txtViewNameHoroscope.text.toString(), "TODAY")
+            txtViewDataHoroscope.text =  horoscope.data.horoscope_data
+        }
+
+        println(horoscope)
+
         getSupportActionBarHoroscope ()
     }
 
@@ -50,7 +64,7 @@ class DetailsHoroscope : AppCompatActivity() {
 
         var name = getString(horoscope.name)
 
-        if (session.getHoroscope(name) == SessionManager.ACTIVE)
+        if (session.isFavorite(name))
             menu.findItem(R.id.actionFavorite).setIcon(R.drawable.ic_favorite)
 
         return true
@@ -63,7 +77,7 @@ class DetailsHoroscope : AppCompatActivity() {
             R.id.actionFavorite -> {
                 var name = getString(horoscope.name)
 
-                if (session.getHoroscope(name) == SessionManager.DES_ACTIVE) {
+                if (!session.isFavorite(name)) {
                     session.saveHoroscope(name, SessionManager.ACTIVE)
                     item.setIcon(R.drawable.ic_favorite)
                 } else {
@@ -80,13 +94,13 @@ class DetailsHoroscope : AppCompatActivity() {
 
     private fun init() {
         txtViewNameHoroscope = findViewById(R.id.txtViewNameHoroscope)
+        txtViewDataHoroscope = findViewById(R.id.txtViewDataHoroscope)
         imgHoroscope = findViewById(R.id.imgHoroscope)
         txtDateHoroscope = findViewById(R.id.txtViewDateHoroscope)
     }
 
     private fun getHoroscope ():Horoscope {
-        var id = intent.getStringExtra("id")
-        return HoroscopeProvider.findById(id!!.toInt())
+        return HoroscopeProvider.findById(intent.getStringExtra("id")!!.toInt())
     }
 
     private fun share () {

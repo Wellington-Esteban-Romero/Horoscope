@@ -20,8 +20,8 @@ class HoroscopeAdapter(
         )
     }
 
-    fun filterList(filterList: List<Horoscope>) {
-        horoscopes = filterList;
+    fun filterHoroscope(horoscope: List<Horoscope>) {
+        this.horoscopes = horoscope;
         notifyDataSetChanged()
     }
 
@@ -48,11 +48,9 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             onClickListener(horoscope)
         }
 
-        if (SessionManager(context).isFavorite(txtName.text.toString())) {
+        if (SessionManager(context).isFavorite(txtName.text.toString()))
             favoriteImageView.visibility = View.VISIBLE
-        } else {
+        else
             favoriteImageView.visibility = View.GONE
-        }
     }
-
 }

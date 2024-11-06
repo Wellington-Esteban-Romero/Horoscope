@@ -21,16 +21,17 @@ class HoroscopeProvider {
             Horoscope(12, R.string.piscis, R.string.date_piscis, R.drawable.ic_psices)
         )
 
-        fun findAll(): List<Horoscope> {
-            return horoscopes;
-        }
+        fun findAll(): List<Horoscope> { return horoscopes; }
 
         fun findById(id: Int): Horoscope {
             return horoscopes.stream()
                 .filter { h -> h.id == id }
                 .findFirst()
-                .orElse(null)
+                .orElseThrow()
         }
 
+        fun search(txt:String) {
+
+        }
     }
 }

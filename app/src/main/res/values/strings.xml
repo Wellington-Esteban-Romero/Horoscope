@@ -2,17 +2,17 @@
     <string name="app_name">Horoscope</string>
 
     <string name="aries">Aries</string>
-    <string name="tauro">Tauro</string>
-    <string name="geminis">Géminis</string>
-    <string name="cancer">Cáncer</string>
+    <string name="tauro">Taurus</string>
+    <string name="geminis">Gemini</string>
+    <string name="cancer">Cancer</string>
     <string name="leo">Leo</string>
     <string name="virgo">Virgo</string>
     <string name="libra">Libra</string>
-    <string name="escorpio">Escorpio</string>
-    <string name="sagitario">Sagitario</string>
-    <string name="capripornio">Capricornio</string>
-    <string name="acuario">Acuario</string>
-    <string name="piscis">Piscis</string>
+    <string name="escorpio">Scorpio</string>
+    <string name="sagitario">Sagittarius</string>
+    <string name="capripornio">Capricorn</string>
+    <string name="acuario">Aquarius</string>
+    <string name="piscis">Pisces</string>
 
     <string name="date_aries">21 de marzo al 19 de abril</string>
     <string name="date_tauro">20 de abril al 20 de mayo</string>

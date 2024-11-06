@@ -44,9 +44,6 @@ class MainActivity : AppCompatActivity() {
 
         init()
 
-        session = SessionManager(applicationContext)
-
-        recycler = findViewById(R.id.rvHoroscope)
         horoscopeList = HoroscopeProvider.findAll()
 
         horoscopeAdapter = HoroscopeAdapter(horoscopeList) { horoscope ->
@@ -62,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         recycler = findViewById(R.id.rvHoroscope)
+        session = SessionManager(applicationContext)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -85,19 +83,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun filter(text: String) {
-        val filteredList: ArrayList<Horoscope> = ArrayList()
+        val horoscopeList: ArrayList<Horoscope> = ArrayList()
 
         for (item in horoscopeList) {
-             if (getString(item.name).lowercase().contains(text.lowercase())) {
-                filteredList.add(item);
+             if (getString(item.name).lowercase().contains(text.lowercase())
+                 || getString(item.date).lowercase().contains(text.lowercase())
+                 ) {
+                 horoscopeList.add(item);
             }
         }
 
-        if (filteredList.isEmpty()) {
-            //setContentView(R.layout.empty)
+        if (horoscopeList.isEmpty()) {
             Toast.makeText(this, getText(R.string.no_search), Toast.LENGTH_SHORT).show()
         } else {
-            horoscopeAdapter.filterList(filteredList)
+            horoscopeAdapter.filterHoroscope(horoscopeList)
         }
     }
 
@@ -107,7 +106,7 @@ class MainActivity : AppCompatActivity() {
 
         var name = getString(horoscope.name)
 
-        if (session.getHoroscope(name) != SessionManager.ACTIVE)
+        if (!session.isFavorite(name))
             session.saveHoroscope(name, SessionManager.DES_ACTIVE)
 
         startActivity(intent)
