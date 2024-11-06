@@ -12,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.horoscope.MainActivity.Companion.session
 import com.horoscope.data.Horoscope
 import com.horoscope.data.HoroscopeProvider
-import com.horoscope.data.HoroscopeResponse
 import com.horoscope.data.HoroscopeServiceFactory
 import com.horoscope.utils.SessionManager
 import kotlinx.coroutines.launch
@@ -50,10 +52,13 @@ class DetailsHoroscope : AppCompatActivity() {
 
         lifecycleScope.launch {
            val horoscope = service.getHoroscope(txtViewNameHoroscope.text.toString(), "TODAY")
+            val options = TranslatorOptions.Builder()
+                .setTargetLanguage(TranslateLanguage.SPANISH)
+                .build()
+            val englishSpanishTranslator = Translation.getClient(options)
+            //englishSpanishTranslator.translate(horoscope.data.horoscope_data).result
             txtViewDataHoroscope.text =  horoscope.data.horoscope_data
         }
-
-        println(horoscope)
 
         getSupportActionBarHoroscope ()
     }
