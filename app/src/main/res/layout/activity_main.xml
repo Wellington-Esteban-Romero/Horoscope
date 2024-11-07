@@ -9,6 +9,7 @@
     tools:context="com.horoscope.MainActivity">
     
     <LinearLayout
+        android:id="@+id/list_horoscope"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -22,4 +23,19 @@
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/msg_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:text="No existe Horoscope">
+
+        </TextView>
+    </LinearLayout>
 </LinearLayout>

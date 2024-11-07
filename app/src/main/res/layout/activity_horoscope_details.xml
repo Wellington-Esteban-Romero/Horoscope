@@ -42,26 +42,16 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtViewDateHoroscope"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="sa"
-        android:gravity="center"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/idSquare"
-        tools:ignore="MissingConstraints">
-
-    </TextView>
-
-    <TextView
         android:id="@+id/txtViewDataHoroscope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/txtViewDateHoroscope"
+        android:justificationMode="inter_word"
+        android:padding="16dp"
+        android:text="sa"
+        app:layout_constraintTop_toBottomOf="@id/idSquare"
         tools:ignore="MissingConstraints">
 
     </TextView>

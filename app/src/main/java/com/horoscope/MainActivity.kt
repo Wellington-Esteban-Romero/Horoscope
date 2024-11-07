@@ -5,6 +5,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var horoscopeAdapter: HoroscopeAdapter
     private lateinit var horoscopeList: List<Horoscope>
+    private lateinit var list_horoscope:LinearLayout
+    private lateinit var msg_empty:LinearLayout
     private lateinit var recycler:RecyclerView
 
     companion object {
@@ -59,6 +63,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         recycler = findViewById(R.id.rvHoroscope)
+        list_horoscope = findViewById(R.id.list_horoscope)
+        msg_empty = findViewById(R.id.msg_empty)
         session = SessionManager(applicationContext)
     }
 
@@ -85,17 +91,20 @@ class MainActivity : AppCompatActivity() {
     private fun filter(text: String) {
         val horoscopeList: ArrayList<Horoscope> = ArrayList()
 
-        for (item in horoscopeList) {
-             if (getString(item.name).lowercase().contains(text.lowercase())
-                 || getString(item.date).lowercase().contains(text.lowercase())
-                 ) {
-                 horoscopeList.add(item);
+        for (item in this.horoscopeList) {
+            if (getString(item.name).lowercase().contains(text.lowercase())
+                || getString(item.date).lowercase().contains(text.lowercase())
+            ) {
+                horoscopeList.add(item);
             }
         }
 
         if (horoscopeList.isEmpty()) {
-            Toast.makeText(this, getText(R.string.no_search), Toast.LENGTH_SHORT).show()
+            list_horoscope.visibility = View.GONE
+            msg_empty.visibility = View.VISIBLE
         } else {
+            list_horoscope.visibility = View.VISIBLE
+            msg_empty.visibility = View.GONE
             horoscopeAdapter.filterHoroscope(horoscopeList)
         }
     }

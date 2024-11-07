@@ -12,7 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.tasks.Task
+import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.common.model.RemoteModelManager
 import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.TranslateRemoteModel
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.horoscope.MainActivity.Companion.session
@@ -20,6 +24,7 @@ import com.horoscope.data.Horoscope
 import com.horoscope.data.HoroscopeProvider
 import com.horoscope.data.HoroscopeServiceFactory
 import com.horoscope.utils.SessionManager
+import com.horoscope.utils.Utils
 import kotlinx.coroutines.launch
 
 class DetailsHoroscope : AppCompatActivity() {
@@ -46,17 +51,36 @@ class DetailsHoroscope : AppCompatActivity() {
 
         txtViewNameHoroscope.setText(horoscope.name)
         imgHoroscope.setImageResource(horoscope.image)
-        txtDateHoroscope.setText(horoscope.date)
 
         val service = HoroscopeServiceFactory.getRetrofitService()
 
         lifecycleScope.launch {
-           val horoscope = service.getHoroscope(txtViewNameHoroscope.text.toString(), "TODAY")
-            val options = TranslatorOptions.Builder()
+           val horoscope = service.getHoroscope(Utils.getHoroscopeEnglish(horoscope.id), "TODAY")
+            /*val options:TranslatorOptions = TranslatorOptions.Builder()
+                .setTargetLanguage(TranslateLanguage.ENGLISH)
                 .setTargetLanguage(TranslateLanguage.SPANISH)
                 .build()
             val englishSpanishTranslator = Translation.getClient(options)
-            //englishSpanishTranslator.translate(horoscope.data.horoscope_data).result
+            var data:String =  horoscope.data.horoscope_data
+            var task:Task<String> = englishSpanishTranslator.translate(data).addOnSuccessListener { translatedText ->
+                txtViewDataHoroscope.text =  translatedText
+            }.addOnFailureListener { exception ->
+                txtViewDataHoroscope.text =  "ERROR"
+            }
+           val modelManager = RemoteModelManager.getInstance()
+            var conditions = DownloadConditions.Builder()
+                .requireWifi()
+                .build()
+            englishSpanishTranslator.downloadModelIfNeeded(conditions)
+                .addOnSuccessListener {
+                    // Model downloaded successfully. Okay to start translating.
+                    // (Set a flag, unhide the translation UI, etc.)
+                }
+                .addOnFailureListener { exception ->
+                    // Model couldn’t be downloaded or other internal error.
+                    // ...
+                }*/
+
             txtViewDataHoroscope.text =  horoscope.data.horoscope_data
         }
 
@@ -101,7 +125,7 @@ class DetailsHoroscope : AppCompatActivity() {
         txtViewNameHoroscope = findViewById(R.id.txtViewNameHoroscope)
         txtViewDataHoroscope = findViewById(R.id.txtViewDataHoroscope)
         imgHoroscope = findViewById(R.id.imgHoroscope)
-        txtDateHoroscope = findViewById(R.id.txtViewDateHoroscope)
+        //txtDateHoroscope = findViewById(R.id.txtViewDateHoroscope)
     }
 
     private fun getHoroscope ():Horoscope {

@@ -29,9 +29,5 @@ class HoroscopeProvider {
                 .findFirst()
                 .orElseThrow()
         }
-
-        fun search(txt:String) {
-
-        }
     }
 }

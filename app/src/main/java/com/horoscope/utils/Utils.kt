@@ -1,8 +1,25 @@
 package com.horoscope.utils
 
-import android.graphics.drawable.ColorDrawable
-import com.horoscope.R
 
 class Utils {
 
+    companion object {
+        fun getHoroscopeEnglish(id: Int): String {
+            val horoscope = listOf(
+                "Aries",
+                "Taurus",
+                "Gemini",
+                "Cancer",
+                "Leo",
+                "Virgo",
+                "Libra",
+                "Scorpio",
+                "Sagittarius",
+                "Capricorn",
+                "Aquarius",
+                "Pisces"
+            )
+            return horoscope.get(id - 1)
+        }
+    }
 }
